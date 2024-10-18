@@ -1,0 +1,27 @@
+1. Registration
+2. Login
+
+3. Shippment
+  1. Tracking number
+  2. Senders name
+  3. Receivers name
+  4. Sender address
+  5. Receivers address
+  6. Estimated Delivery date
+  7. Delivery method
+  8. Order number
+  9. Routes
+
+  TRACKING HISTORY
+
+
+4. Locations
+  1. Country name
+  2. Zipcode
+
+5. Route
+  1. Arrived boolean
+  2. arrival date
+  3. message
+  4. expected arrival date
+  5. location

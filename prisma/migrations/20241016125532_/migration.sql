@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `shippment` ADD COLUMN `status` ENUM('ARRIVED', 'IN_TRANSIT') NOT NULL DEFAULT 'IN_TRANSIT';

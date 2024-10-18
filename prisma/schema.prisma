@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+// }
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+enum ArrivalStatus {
+  ARRIVED
+  IN_TRANSIT
+}
+
+enum DeliveryMode {
+  BY_SHIP
+  BY_AIR
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+}
+
+model Route {
+  id                  String        @id @default(uuid())
+  location            String
+  expectedArrivalDate DateTime
+  arrivalDate         DateTime?
+  status              ArrivalStatus @default(IN_TRANSIT)
+  message             String?
+  Shippment           Shippment?    @relation(fields: [shippmentId], references: [id], onDelete: Cascade)
+  shippmentId         String?
+  createdAt           DateTime      @default(now())
+}
+
+model Shippment {
+  id                    String        @id @default(uuid())
+  trackingNumber        String
+  sendersName           String
+  origin                String
+  destination           String
+  receiversName         String
+  sendersAddress        String
+  receiversAddress      String
+  status                ArrivalStatus @default(IN_TRANSIT)
+  estimatedDeliveryDate DateTime
+  deliveryMode          DeliveryMode
+  content               String?
+  createdAt             DateTime      @default(now())
+  routes                Route[]
+}
